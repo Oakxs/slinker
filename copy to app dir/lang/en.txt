@@ -1,0 +1,10 @@
+Add a rule
+Name this link
+Create a new command
+Change group
+Link added successfully
+Rule added successfully
+Keyword is occupied
+Successfully added to startup
+select language
+There is no such language
