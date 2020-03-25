@@ -29,6 +29,7 @@ static QList<QString> &record=histroy.record;
 void chang_group_mode(){
     edit->changeState(CHANGE_GROUP);
     edit->setText("");
+    edit->clearSet();
 }
 
 void app_quit(){
@@ -165,13 +166,13 @@ bool MyLineEdit::runCmd(const QString& cmdStr){
         auto funcEntry = basicFuncMap.find(cmdStr.toStdString());
         if(funcEntry!=basicFuncMap.end()){
             funcEntry->second();
-            return true;
+            return false;
         }
         if(groupName=="settings"){
             funcEntry = settingFuncMap.find(cmdStr.toStdString());
             if(funcEntry!=settingFuncMap.end()){
                 funcEntry->second();
-                return true;
+                return false;
             }
         }
     }
