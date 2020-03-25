@@ -27,6 +27,7 @@ private:
     Ui::MainWindow *ui;
     QPushButton *btn_quit;
     QPushButton *btn_add_rule;
+//    void topWindow();
 private slots:
     void exit();
     void add_rule();

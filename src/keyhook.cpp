@@ -32,7 +32,10 @@ LRESULT CALLBACK keyProc(int nCode, WPARAM wParam, LPARAM lParam)
         case WM_SYSKEYUP:
         case WM_KEYUP:
             release_r=true;
-            if(release_win)first_press=true;
+            if(release_win){
+                main_window->start();
+                first_press=true;
+            }
             return 0;
         }
     }
@@ -45,7 +48,10 @@ LRESULT CALLBACK keyProc(int nCode, WPARAM wParam, LPARAM lParam)
         case WM_SYSKEYUP:
         case WM_KEYUP:
             release_win=true;
-            if(release_r)first_press=true;
+            if(release_r){
+                main_window->start();
+                first_press=true;
+            }
             return 0;
         }
     }
@@ -53,17 +59,22 @@ LRESULT CALLBACK keyProc(int nCode, WPARAM wParam, LPARAM lParam)
     return CallNextHookEx(keyHook, nCode, wParam, lParam);
 }
 
-////鼠标钩子过程
+//////鼠标钩子过程
 //LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 //{
-//    return 1;
+//    POINT p;
+//    LPPOINT pp=&p;
+//    GetCursorPos(pp);
+////    qDebug()<<pp->x<<pp->y;
+
+//    return 0;
 //}
 
 //卸载钩子
 void unHook()
 {
     UnhookWindowsHookEx(keyHook);
-    //  UnhookWindowsHookEx(mouseHook);
+//    UnhookWindowsHookEx(mouseHook);
 }
 
 //安装钩子,调用该函数即安装钩子
@@ -73,7 +84,7 @@ void setHook()
     //底层键盘钩子
     keyHook = SetWindowsHookEx(WH_KEYBOARD_LL, keyProc, GetModuleHandle(NULL), 0);
     //底层鼠标钩子
-    //    mouseHook =SetWindowsHookEx( WH_MOUSE_LL,mouseProc,GetModuleHandle(NULL),0);
+//    mouseHook =SetWindowsHookEx( WH_MOUSE_LL,mouseProc,GetModuleHandle(NULL),0);
 }
 
 //extern
@@ -83,3 +94,7 @@ void hookSetup(bool state){
     else
         unHook();
 }
+
+//---------main window------------
+
+

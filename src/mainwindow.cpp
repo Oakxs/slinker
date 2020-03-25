@@ -47,13 +47,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::start(QString groupName,bool show)
 {
-    if(show)
-        this->show();
-    activateWindow();
     check_file_modified();
     edit->changeState(RUNNING);
     if(groupName!=0)
         edit->setGroup(groupName);
+
+    if(show){//找了半天设置焦点的方法没有...发现hide show还能用
+        this->hide();
+        this->show();
+        activateWindow();
+    }
+
+
+
 }
 
 
@@ -111,6 +117,7 @@ void MainWindow::closeEvent(QCloseEvent *event){
     event->ignore();
     exit();
 }
+
 
 //slots
 void MainWindow::exit(){

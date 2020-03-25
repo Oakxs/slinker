@@ -109,7 +109,7 @@ MyLineEdit::MyLineEdit(QWidget * parent):QLineEdit (parent)
 
 void MyLineEdit::addFile(const QString& filename){
     if(groupName=="setting") return;
-    this->ruleContent = "start "+filename;
+    this->ruleContent = "start \"\" \""+filename+"\"";
     changeState(NAMING_A_LINK);
 }
 
@@ -215,7 +215,7 @@ bool MyLineEdit::runCmd(const QString& cmdStr){
         setText("");
         if(error.size() ==0){
             if(is_empty)
-                fileSetting->setValue(cmdStr,"");            
+                fileSetting->setValue(cmdStr,"");
         }else {
             return false;
         }
